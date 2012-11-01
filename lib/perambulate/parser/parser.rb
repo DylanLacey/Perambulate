@@ -3,9 +3,12 @@ require "whittle"
 module Perambulate
   class Parser < Whittle::Parser
 
+    # Terminal Symbols -- ORDER MATTERS
     rule(:wsp => /[\s+|,\/-]/).skip!
-    rule(:designation => /Street/)
     rule(:number => /\d+/)
+    rule(:unit => /[Unit|Num|Number|No\.]/i) ^ 2
+    rule(:designation => /Street/)
+
     rule(:word => /[a-zA-Z]+/)
 
     rule(:name) do |r|
@@ -14,8 +17,17 @@ module Perambulate
     end
 
     rule(:street_number_block) do |r|
-      r[:number, :number].as {|a,b| {:unit_number => a, :street_number => b}}
+      r[:unit_number, :number].as {|a,b| {:unit_number => a, :street_number => b}}
       r[:number].as {|a| {:street_number => a}}
+    end
+
+    rule(:unit_symbol) do |r|
+      r[:unit]
+      r[]
+    end
+
+    rule(:unit_number) do |r|
+      r[:unit_symbol, :number].as {|a, b| b}
     end
 
     rule(:street_specification) do |r|
