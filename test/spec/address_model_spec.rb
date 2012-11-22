@@ -21,4 +21,17 @@ describe "A new address" do
     end
 
   end
+
+  describe "Not passed an options hash" do
+    let (:address) {Perambulate::Address.new()}
+
+    it "should have nils for all options" do
+      address.street_number.should be_nil
+      address.street_name.should be_nil
+      address.designation.should be_nil
+      address.suburb.should be_nil
+      address.postcode.should be_nil
+      address.state.should be_nil
+    end
+  end
 end
