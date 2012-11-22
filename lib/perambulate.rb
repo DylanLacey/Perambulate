@@ -2,6 +2,7 @@
 require "perambulate/address/address"
 require "perambulate/lexer/aussie_lexer"
 require "perambulate/parser/parser"
+require "perambulate/designations"
 
 
   module Perambulate
