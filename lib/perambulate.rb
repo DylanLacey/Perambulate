@@ -6,6 +6,17 @@ require "perambulate/designations"
 
 
   module Perambulate
+
+    @@configuration = {:default_parser => "Australian"}
+
+    def self.config
+      return @@configuration
+    end
+
+    def self.configure(&block)
+      yield @@configuration
+    end
+
     def self.create_address(address_string)
       Address.new
     end
