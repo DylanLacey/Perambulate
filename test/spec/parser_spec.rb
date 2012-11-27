@@ -1,4 +1,4 @@
-require "rspec"
+require "test/spec/spec_helper"
 
 describe "Parser" do
   context "When short-circuited with single terminals" do
@@ -13,7 +13,7 @@ describe "Parser" do
     end
 
     it "should not return anything" do
-      parser.parse("48a", :rule => :street_number_block).should_not eql "48a"
+      parser.parse("48a", :rule => :street_number_block).should raise_exception (Whittle::ParseError)
     end
 
     it "should correctly parse a designation" do

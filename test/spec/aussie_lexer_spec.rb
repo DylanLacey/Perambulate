@@ -1,5 +1,4 @@
-require "rspec"
-require "test_helper"
+require "test/spec/spec_helper"
 
 describe "AussieLexer" do
 

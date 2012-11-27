@@ -18,7 +18,8 @@ require "perambulate/designations"
     end
 
     def self.create_address(address_string)
-      Address.new
+      lexemes = AussieLexer.new(address_string)
+
     end
   end
 

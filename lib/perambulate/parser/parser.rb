@@ -4,16 +4,24 @@ module Perambulate
   class Parser < Whittle::Parser
 
     # Terminal Symbols -- ORDER MATTERS
-    rule(:wsp => /[\s+|,\/-]/).skip!
+    rule(:wsp => /\s+/).skip!
     rule(:number => /\d+/)
-    rule(:unit => /[Unit|Num|Number|No\.]/i) ^ 2
+    rule(:unit_symbol => /Unit|Num|Number|No/i)
+    rule(:unit_separator => /\/|-|,/)
+    rule(:street_separator => /,/)
     rule(:designation => /Street/)
 
     rule(:word => /[a-zA-Z]+/)
 
-    rule(:name) do |r|
-      r[:name, :word].as {|a,b| "#{a} #{b}"}
-      r[:word]
+    rule(:unit_prefix) do |r|
+      r[]
+      r[:unit_symbol]
+
+    end
+
+    rule(:unit_number) do |r|
+      r[:unit_prefix, :number, :unit_separator].as {|_, b, _| b}
+      r[:number, :unit_separator].as {|a, _| a}
     end
 
     rule(:street_number_block) do |r|
@@ -21,13 +29,9 @@ module Perambulate
       r[:number].as {|a| {:street_number => a}}
     end
 
-    rule(:unit_symbol) do |r|
-      r[:unit]
-      r[]
-    end
-
-    rule(:unit_number) do |r|
-      r[:unit_symbol, :number].as {|a, b| b}
+    rule(:name) do |r|
+      r[:name, :word].as {|a,b| "#{a} #{b}"}
+      r[:word]
     end
 
     rule(:street_specification) do |r|
@@ -40,9 +44,17 @@ module Perambulate
     end
 
     rule(:addr) do |r|
+      r[:street_block, :optional_suburb_separator, :name].as {|a,_,b| a.merge({:suburb => b})}
       r[:street_block, :name].as {|a,b| a.merge({:suburb => b})}
       r[:street_block]
       r[:name].as {|a| {:suburb => a}}
+    end
+
+    rule(:optional_suburb_separator) do |r|
+      r[:street_separator]
+      r[:unit_separator]
+
+
     end
 
     start(:addr)
