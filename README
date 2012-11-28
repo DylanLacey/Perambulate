@@ -3,3 +3,34 @@ Perambulate is a library for parsing addresses in natural language.
 As Seen On TV(tm), Perambulate makes it easier for you to get customer addresses in a normal, conversational form.
 No more thousands of input boxes, drop-downs and annoying conversational logic.  Simply ask for their address
 and run it through Perambulate.
+
+Limitations
+===========
+Currently, this tool does nothing.  It's still in very early stages and doesn't even have a concrete architecture yet.
+
+You *CAN* expect constant breaking changes on Master.
+
+The first iteration will not handle countries:  To make things simpler, you need to know what country address grammar you're
+attempting to parse before parsing it.
+
+The first iteration is being done on Australian style addresses because that's what I'm familiar with.  Sorry, Matz.
+
+Goals
+=====
+
+I want Perambulate to be an address management toolkit for developers.  Desired features are:
+
+* Chunk any given address
+* Offer a likilhood of any string being a specific set of address units
+* Validate that any chunk is a member of a valid set (ie restrict 'suburb' to a defined set)
+* Have a variety of address parsers to suit specific combinations of
+
+Architecture
+============
+
+This section was last updated for version: 0.0.1
+If this is not the latest version of the gem, this document is out of date.  You're most welcome to correct everything below
+this paragraph but please don't change the version without checking that the following is true.  I don't want to lie to
+other developers ;)
+
+Perambulate is the library module where all user interaction functions live, including configuration.
