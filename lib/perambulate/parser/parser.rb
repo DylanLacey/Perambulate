@@ -1,4 +1,5 @@
 require "whittle"
+require "lib/perambulate/designations"
 
 module Perambulate
   class Parser < Whittle::Parser
@@ -9,7 +10,7 @@ module Perambulate
     rule(:unit_symbol => /Unit|Num|Number|No/i)
     rule(:unit_separator => /\/|-|,/)
     rule(:street_separator => /,/)
-    rule(:designation => /Street/)
+    rule(:designation => Perambulate::Designations::PARSELIST)
 
     rule(:word => /[a-zA-Z]+/)
 
