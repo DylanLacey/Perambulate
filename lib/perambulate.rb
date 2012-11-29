@@ -4,21 +4,19 @@ require "perambulate/lexer/aussie_lexer"
 require "perambulate/parser/parser"
 require "perambulate/designations"
 
+module Perambulate
 
-  module Perambulate
+  @@configuration = {:default_parser => "Australian"}
 
-    @@configuration = {:default_parser => "Australian"}
-
-    def self.config
-      return @@configuration
-    end
-
-    def self.configure(&block)
-      yield @@configuration
-    end
-
-    def self.create_address(address_string)
-      address = Perambulate::Parser.new().parse(address_string)
-    end
+  def self.config
+    @@configuration
   end
 
+  def self.configure(&block)
+    yield @@configuration
+  end
+
+  def self.create_address(address_string)
+    address = Perambulate::Parser.new().parse(address_string)
+  end
+end

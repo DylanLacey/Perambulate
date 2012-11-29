@@ -5,6 +5,8 @@ No more thousands of input boxes, drop-downs and annoying conversational logic. 
 and run it through Perambulate.
 
 Usage
------
+=====
 
-Perambulate.create_address(address_string)
+    require "perambulate"
+
+    Perambulate.create_address(address_string)

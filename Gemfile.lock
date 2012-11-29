@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    perambulate (0.0.3)
+    perambulate (0.0.4)
       lexr (~> 0.3.1)
       rake (~> 0.9.2.2)
       whittle (~> 0.0.8)
