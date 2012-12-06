@@ -1,3 +1,7 @@
-class Designation
-  # To change this template use File | Settings | File Templates.
+module Perambulate
+  class Designation
+    def initialize(street_name)
+
+    end
+  end
 end

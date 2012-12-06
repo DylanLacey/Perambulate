@@ -10,3 +10,14 @@ Usage
     require "perambulate"
 
     Perambulate.create_address(address_string)
+
+
+Limitations
+===========
+
+At the moment, Perambulate only supports typical Australian addresses.
+
+There is no support for parsing countries.
+
+We do not, and likely will never, do postcode verification.  Since you get the postcode and the suburb back independantly,
+it's fairly easy to hook up a postcode verifier once you have the data in hand.
